@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const GroupSchema = new mongoose.Schema({
-    name: {type: String, required: true},
+    name: {type: String, required: true, unique: true},
     professor: {type: String, required: true},
 })
 

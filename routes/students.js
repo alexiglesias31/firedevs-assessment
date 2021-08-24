@@ -1,4 +1,5 @@
 const Student = require('../models/student')
+const Group = require('../models/group')
 const moment = require('moment')
 
 const checkFieldsStudent = (body) => {
@@ -18,6 +19,11 @@ const validateEmail = (email) => {
 
 const validateDate = (date) => {
     return moment(date, "YYYY-MM-DD", true).isValid()
+}
+
+const validateGroup = async (id) => {
+    const group = await Group.findById(id)
+    return group ? true : false
 }
 
 module.exports = function (app) {
@@ -46,6 +52,11 @@ module.exports = function (app) {
 
             if (!validateDate(params.birthdate)) {
                 res.status(400).json('Birthdate is not valid')
+                return
+            }
+
+            if (!validateGroup(params.groupId)) {
+                res.status(400).json('Group id is not valid')
                 return
             }
 
@@ -123,6 +134,11 @@ module.exports = function (app) {
 
             if (params.birthdate !== undefined && !validateDate(params.birthdate)) {
                 res.status(400).json('Birthdate is not valid')
+                return
+            }
+
+            if (!validateGroup(params.groupId)) {
+                res.status(400).json('Group id is not valid')
                 return
             }
 
