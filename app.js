@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Add routes
 apiRouter(app)
 studentsRouter(app)
-// groupsRouter(app)
+groupsRouter(app)
 
 // Connect to DB
 mongoose
